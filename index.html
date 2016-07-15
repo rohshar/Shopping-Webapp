@@ -5,6 +5,7 @@
     <title>Shopping App!</title>
     <script type="text/javascript" src="jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="location.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEikMyjUP2Lg1Y4B1FeiFVIMG1Q4Vynk&libraries=places"></script>
 
     <style type="text/css">
         html,
@@ -21,6 +22,11 @@
     <p id="changeText">Lets figure out your location!</p>
     <input type="text" id="input1" />
     <button onclick="displayInput('input1', '#changeText')">Submit Location</button>
-
+    <p></p>
+    <p id="allPlaces">What are the closest locations to you?</p>
+    <button onclick="initialize()">Find Places</button>
+    <div id="map"></div>
+    <p id="startLat">This is your latitude</p>
+    <p id="startLon">This is your longitude</p>
 </body>
 </html>

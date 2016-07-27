@@ -6,61 +6,38 @@ window.onload = function() {
     document.getElementById('startLon').innerHTML = startPos.coords.longitude;
   };
   navigator.geolocation.getCurrentPosition(geoSuccess);
+  var mapDiv = document.getElementById('map');
+  var map = new google.maps.Map(mapDiv, {
+      center: {lat: 0, lng: 0},
+      zoom: 4
+  });
 };
 
 
 
-
-function testLocation() {
-	console.log(google.loader.ClientLocation);
-	if ((google.loader) && (google.loader.ClientLocation)) {
-        var latitude = google.loader.ClientLocation.latitude;
-        var longitude = google.loader.ClientLocation.longitude;
-        var city = google.loader.ClientLocation.address.city;
-        var country = google.loader.ClientLocation.address.country;
-        var country_code = google.loader.ClientLocation.address.country_code;
-        var region = google.loader.ClientLocation.address.region;
-
-        var text = 'Your Location<br /><br />Latitude: ' + latitude + '<br />Longitude: ' + longitude + '<br />City: ' + city + '<br />Country: ' + country + '<br />Country Code: ' + country_code + '<br />Region: ' + region;
-
-    } else {
-
-        var text = 'Google was not able to detect your location';
-
-    }
-
-    document.write(text);
-}
-
-
-
-
-
-function displayInput(input, change) {
-    var text=document.getElementById(input).value;
-    $(change).html(text);
-}
-
-
-
-
-
 function initialize() {
-  var my_place = new google.maps.LatLng(51.5032510, -0.1278950);
+  if (document.getElementById('startLat').innerHTML != "This is your latitude") {
+    var my_place = new google.maps.LatLng(document.getElementById('startLat').innerHTML, document.getElementById('startLon').innerHTML);
 
-  var location_map = new google.maps.Map(document.getElementById('map'), {
-      center: my_place,
-      zoom: 15
+    var location_map = new google.maps.Map(document.getElementById('map'), {
+        center: my_place,
+        zoom: 15
     });
 
-  var request = {
-    location: my_place,
-    radius: '300',
-    query: 'shop'
-  };
+    var request = {
+      location: my_place,
+      radius: '300',
+      query: 'shop'
+    };
 
-  var service = new google.maps.places.PlacesService(map);
-  service.textSearch(request, callback);
+    console.log('workignpls')
+    var service = new google.maps.places.PlacesService(location_map);
+    service.textSearch(request, callback);
+  }
+  else {
+    document.getElementById('startLat').innerHTML = "Let your latitude load!"
+    document.getElementById('startLon').innerHTML = "Let your longitude load!"
+  }
 }
 
 function callback(results, status) {

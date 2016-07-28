@@ -1,5 +1,7 @@
 var latitude = null;
 var longitude = null;
+var usingCurrentLocation = true;
+
 window.onload = function() {
   var startPos;
   var geoSuccess = function(position) {
@@ -11,7 +13,7 @@ window.onload = function() {
   };
   navigator.geolocation.getCurrentPosition(geoSuccess);
   var mapDiv = document.getElementById('map');
-  var map = new google.maps.Map(mapDiv, {
+  location_map = new google.maps.Map(mapDiv, {
       center: {lat: 0, lng: 0},
       zoom: 4
   });
@@ -23,31 +25,62 @@ var my_place = null;
 var found_location = false;
 function center() {
   if (latitude) {
+    if (lastCenterMarker) {
+      lastCenterMarker.setMap(null);
+    }
     my_place = new google.maps.LatLng(latitude, longitude);
-
-    location_map = new google.maps.Map(document.getElementById('map'), {
-        center: my_place,
-        zoom: 15
-      });
+    location_map.setCenter(my_place);
+    location_map.setZoom(15);
 
     var centerMarker = new google.maps.Marker({
       position: my_place,
       map: location_map,
-        icon: 'GoogleMapsMarkers/red_MarkerA.png'
+      icon: 'GoogleMapsMarkers/red_MarkerA.png'
     });
     found_location = true;
+    usingCurrentLocation = true;
+    lastCenterMarker = centerMarker;
   } else {
     document.getElementById('startLat').innerHTML = "Let your latitude load!";
     document.getElementById('startLon').innerHTML = "Let your longitude load!";
   }
 }
 
+var lastCenterMarker;
+var geocoder;
+function centerAddress(input) {
+  geocoder = new google.maps.Geocoder();
+  var address=document.getElementById(input).value;
+  console.log(address)
+  if (lastCenterMarker) {
+    lastCenterMarker.setMap(null);
+  }
+  geocoder.geocode( {'address': address}, function(results, status) {
+    if (status == 'OK') {
+      my_place = results[0].geometry.location;
+      location_map.setCenter(my_place);
+      location_map.setZoom(15)
+      var marker = new google.maps.Marker({
+          map: location_map,
+          position: results[0].geometry.location,
+          icon: 'GoogleMapsMarkers/red_MarkerA.png'
+      });
+      lastCenterMarker = marker;
+      found_location = true;
+      usingCurrentLocation = false;
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+
 var foundPlaces = false;
 function initialize() {
   if ((found_location == true) && (search != null)) {
     var request = {
       location: my_place,
-      radius: '300',
+      radius: '1000',
       query: search
     };
     if (foundPlaces == true) {
@@ -70,6 +103,7 @@ function initialize() {
   }
 
 }
+
 
 var prevInfoWindow;
 var places = [];
@@ -115,8 +149,6 @@ function callback(results, status, pagination) {
     }
   }
 }
-
-
 
 
 var search = null;

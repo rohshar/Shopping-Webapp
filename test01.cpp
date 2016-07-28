@@ -29,7 +29,9 @@ int main()
 
 
 
-//My Google Places API key (Server) = AIzaSyAfEikMyjUP2Lg1Y4B1FeiFVIMG1Q4Vynk
-//My Google Javascript API key (Browser) = AIzaSyA-3aU8cc1ODOsIAAqyvHE4Qt4wq0oRQ0A  
+//My Google Places API key (Server) = AIzaSyAfEikMyjUP2Lg1Y4B1FeiFVIMG1Q4Vynk 
+                                 // or AIzaSyCqqB2MKarXO5pi4yuEZjcCPADCaBzQ_GE
 
-//My github oauth key = 2b0bb1a90dce6fe18661968fbabbea71828cadd3
+
+
+//My Google Javascript API key (Browser) = AIzaSyA-3aU8cc1ODOsIAAqyvHE4Qt4wq0oRQ0A  

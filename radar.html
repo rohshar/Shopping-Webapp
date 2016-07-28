@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="location.js" charset="utf-8"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEikMyjUP2Lg1Y4B1FeiFVIMG1Q4Vynk&libraries=places">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqqB2MKarXO5pi4yuEZjcCPADCaBzQ_GE&libraries=places">
     </script>
     <style>
       #map {
@@ -25,18 +25,23 @@
   </head>
   <body>
     <h3>My Shopping App</h3>
-    <p id="changeText">Lets figure out what you want to search for!</p>
+    <p id="changeText">Lets figure out what you want to search for! (This will change to your input)</p>
     <input type="text" id="input1" />
     <button onclick="displayInput('input1', '#changeText')">Submit Search!</button>
-    <p></p>
-    <button onclick="center()">Find your location!</button>
-    <p></p>
+    <br>
+    <br>
+    <p>Choose whether to find places close to your location, or based on an address you enter!</p>
+    <button onclick="center()">Find your current location!</button>    OR     
+    <input type="text" id="addressInput" />
+    <button onclick="centerAddress('addressInput')">Find your entered address!</button>
+    <br>
+    <br>
+    <br>
     <button onclick="initialize()">Find closest places</button>
-    <p></p>
+    <br>
 
-
-    <p id="startLat">This is your latitude</p>
-    <p id="startLon">This is your longitude</p>
+    <p id="startLat">This is your latitude (will change to your current latitude).</p>
+    <p id="startLon">This is your longitude (will change to your current latitude).</p>
     <div id="map"></div>
     <p id="allPlaces">What are the closest locations to you?</p>
   </body>

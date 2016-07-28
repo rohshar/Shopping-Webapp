@@ -71,6 +71,7 @@ function initialize() {
 
 }
 
+var prevInfoWindow;
 var places = [];
 var gmarkers = [];
 function callback(results, status, pagination) {
@@ -82,11 +83,30 @@ function callback(results, status, pagination) {
       places = places + "   " + place['id'];
       $("#allPlaces").html(places);
 
+      var info = '<div><strong>' + place.name + '</strong><br>' +
+                'Place ID: ' + place.place_id + '<br>' +
+                place.formatted_address + '</div>'
+      var infowindow = new google.maps.InfoWindow({
+        content: info
+      });
+
       var marker = new google.maps.Marker({
         position: place.geometry.location,
         map: location_map,
         icon: 'GoogleMapsMarkers/blue_MarkerA.png'
       });
+
+      google.maps.event.addListener(marker,'click', (function(marker,info,infowindow){ 
+          return function() {
+              if (prevInfoWindow) {
+                prevInfoWindow.close()
+              }
+              infowindow.setContent(info);
+              infowindow.open(map,marker);
+              prevInfoWindow = infowindow
+          };
+      })(marker,info,infowindow)); 
+
       gmarkers.push(marker);
     }
     if (pagination.hasNextPage) {

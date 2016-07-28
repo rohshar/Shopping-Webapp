@@ -25,9 +25,16 @@
   </head>
   <body>
     <h3>My Shopping App</h3>
+    <p id="changeText">Lets figure out what you want to search for!</p>
+    <input type="text" id="input1" />
+    <button onclick="displayInput('input1', '#changeText')">Submit Search!</button>
+    <p></p>
     <button onclick="center()">Find your location!</button>
     <p></p>
     <button onclick="initialize()">Find closest places</button>
+    <p></p>
+
+
     <p id="startLat">This is your latitude</p>
     <p id="startLon">This is your longitude</p>
     <div id="map"></div>

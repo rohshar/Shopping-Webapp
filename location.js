@@ -25,6 +25,7 @@ var my_place = null;
 var found_location = false;
 function center() {
     if (latitude) {
+        console.log(latitude);
         if (lastCenterMarker) {
             lastCenterMarker.setMap(null);
         }

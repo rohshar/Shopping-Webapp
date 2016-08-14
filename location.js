@@ -6,8 +6,6 @@ window.onload = function() {
     var startPos;
     var geoSuccess = function(position) {
         startPos = position;
-        document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-        document.getElementById('startLon').innerHTML = startPos.coords.longitude;
         latitude = startPos.coords.latitude;
         longitude = startPos.coords.longitude;
     };
@@ -42,8 +40,6 @@ function center() {
         usingCurrentLocation = true;
         lastCenterMarker = centerMarker;
     } else {
-        document.getElementById('startLat').innerHTML = "Let your latitude load!";
-        document.getElementById('startLon').innerHTML = "Let your longitude load!";
     }
 }
 
@@ -98,22 +94,82 @@ function initialize() {
             }
             gmarkers = [];
         }
-        document.getElementById('startLat').innerHTML = "";
-        document.getElementById('startLon').innerHTML = "";
         service = new google.maps.places.PlacesService(location_map);
         service.textSearch(request, callback);
 
     } else if (found_location == false) {
-        document.getElementById('startLat').innerHTML = "Please find your location first!";
-        document.getElementById('startLon').innerHTML = "";
     } else if (search == null) {
-        document.getElementById('startLat').innerHTML = "Please enter a search term!";
-        document.getElementById('startLon').innerHTML = "";
     }
 
 
 }
 
+var driving;
+var walking;
+var biking;
+var transit;
+function getNav() {
+    if (!chosenPlace) {
+        return;
+    } else {
+        var directionsService = new google.maps.DirectionsService;
+        calculateRoute(directionsService);
+    }
+
+}
+
+function calculateRoute(directionsService) {
+    directionsService.route({
+        origin: {lat: latitude, lng: longitude},
+        destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
+        travelMode: google.maps.TravelMode.DRIVING
+    }, function(response, status) {
+        if (status == 'OK') {
+            driving = response;
+            document.getElementById("driveTime").innerHTML=response.routes[0].legs[0].duration.text;
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+    directionsService.route({
+        origin: {lat: latitude, lng: longitude},
+        destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
+        travelMode: google.maps.DirectionsTravelMode.WALKING
+    }, function(response, status) {
+        if (status == 'OK') {
+            walking = response;
+            document.getElementById("walkTime").innerHTML=response.routes[0].legs[0].duration.text;
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+    directionsService.route({
+        origin: {lat: latitude, lng: longitude},
+        destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
+        travelMode: google.maps.DirectionsTravelMode.BICYCLING
+    }, function(response, status) {
+        if (status == 'OK') {
+            biking = response;
+            document.getElementById("bikeTime").innerHTML=response.routes[0].legs[0].duration.text;
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+    directionsService.route({
+        origin: {lat: latitude, lng: longitude},
+        destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
+        travelMode: google.maps.DirectionsTravelMode.TRANSIT
+    }, function(response, status) {
+        if (status == 'OK') {
+            transit = response;
+            document.getElementById("transitTime").innerHTML=response.routes[0].legs[0].duration.text;
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+
+}
+var chosenPlace;
 function addDetails() {
     for (i = 0; i < places2.length; i++) {
         var request2 = { placeId : places2[i]['place_id'] };
@@ -133,6 +189,8 @@ function addDetails() {
                         if (prevInfoWindow) {
                             prevInfoWindow.close()
                         }
+                        chosenPlace = details;
+                        getNav();
                         infowindow.setContent(information);
                         infowindow.open(map,marker);
                         prevInfoWindow = infowindow;
@@ -142,6 +200,7 @@ function addDetails() {
             }
         });
     }
+
 }
 
 
@@ -204,8 +263,6 @@ var search = null;
 function displayInput(input, change) {
     var text=document.getElementById(input).value;
     if (text.trim().length == 0) {
-        document.getElementById('startLat').innerHTML = "Please enter a valid search term!";
-        document.getElementById('startLon').innerHTML = "";
         return;
     }
     search = text;

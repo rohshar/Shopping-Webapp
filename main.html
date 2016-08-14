@@ -32,20 +32,15 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-  <!-- Main Header -->
   <header class="main-header">
-    <a href="index2.html" class="logo">
+    <a class="logo">
       <span class="logo-mini"><b>Shopping</b>Webapp</span>
-      <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Shopping</b>Webapp</span>
     </a>
-    <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
-      <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-      <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account Menu -->
@@ -95,9 +90,7 @@
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
           <img src="dist/img/user-alt-128.png" class="img-circle" alt="User Image">
@@ -105,13 +98,12 @@
         <div class="pull-left info">
           <p>Username</p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Offline</a>
+          <a href="#"><i class="fa fa-circle text-sucess"></i> Offline</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <li class="header">Coupons for Place</li>
-        <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Menu, products, etc</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Reviews, etc</span></a></li>
         <li class="treeview">
@@ -126,44 +118,117 @@
           </ul>
         </li>
       </ul>
-      <!-- /.sidebar-menu -->
     </section>
-    <!-- /.sidebar -->
   </aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Shopping App
-      </h1>
-        <p id="changeText">Lets figure out what you want to search for! (This will change to your input)</p>
-      <input type="text" id="input1" />
-      <button onclick="displayInput('input1', '#changeText')">Submit Search!</button>
-      <br>
-      <br>
-      <p>Choose whether to find places close to your location, or based on an address you enter!</p>
-      <button onclick="center()">Find your current location!</button>    OR     
-      <input type="text" id="addressInput" />
-      <button onclick="centerAddress('addressInput')">Find your entered address!</button>
-      <br>
-      <button onclick="init()">Find closest places</button> then <button onclick="addDetails()">Get Details</button>
-      <br>
-      <p id="startLat">This is your latitude (will change to your current latitude).</p>
-      <p id="startLon">This is your longitude (will change to your current latitude).</p>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Shopping App</h3>
+            </div>
+            <form class="form-horizontal">
+              <div class="box-body">
+                <p class="margin">Find your current location or Use another address</p>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >Current or Other Start Location
+                      <span class="fa fa-caret-down"></span></button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a onclick="center()" href="#">Find Your Current Location</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li>
+                        <a onclick="centerAddress('addressInput')" href="#">Use this Address</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <input type="text" class="form-control" id="addressInput" placeholder="Find your location or search for an address here"/>
+                </div>
+                <p class="margin">Search for Anything!</p>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="displayInput('input1', '#changeText'); init();">Search</button>
+                  </div>
+                  <input type="text" class="form-control" id="input1" placeholder="Lets figure out what you want to search for! (This will change to your input)">
+                </div>
+                  <p class="margin">Get Places</p>
+                 <button type="submit" class ="btn btn-primary" onclick="addDetails()">Get Places</button>
+                </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Location Information</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+
+                  <div class="box-body no-padding">
+                    <table class="table table-striped">
+                      <tbody><tr>
+                        <th>Click on a route for directions</th>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td><div class="icon">
+                          <i class="fa fa-fw fa-male"></i>
+                        </div></td>
+
+                        <td><span class="badge bg-yellow">
+                          <a id="walkTime" href = main.html></a>
+                            </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><div class="icon">
+                          <i class="fa fa-fw fa-car"></i>
+                        </div></td><td><span class="badge bg-yellow">
+                        <a id="driveTime" href = main.html></a>
+                      </span></td>
+                      </tr>
+                      <tr>
+                        <td><div class="icon">
+                          <i class="fa fa-fw fa-bicycle"></i>
+                        </div></td>
+
+                        <td><span class="badge bg-yellow">
+                          <a id="bikeTime" href = main.html></a>
+                        </span></td>
+                      </tr>
+                      <tr>
+                        <td><div class="icon">
+                          <i class="fa fa-fw fa-bus"></i>
+                        </div></td>
+
+                        <td><span class="badge bg-yellow">
+                          <a id="transitTime" href = main.html></a>
+                        </span></td>
+                      </tr>
+                      </tbody>
+
+                      </table>
+                  </div>
+          </div>
+        </div>
+      </div>
+
     </section>
-    <!-- Main content -->
     <section class="content">
       <div class="box box-solid bg-light-blue-gradient">
         <div class="box-header">
           <!-- tools box -->
           <div class="pull-right box-tools">
-            <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range">
-              <i class="fa fa-calendar"></i></button>
             <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
               <i class="fa fa-minus"></i></button>
           </div>
@@ -175,7 +240,7 @@
           <div id="map"></div>
         </div>
       </div>
-      <!-- Your Page Content Here -->
+
     </section>
     <!-- /.content -->
   </div>

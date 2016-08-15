@@ -203,6 +203,88 @@ function addDetails() {
 
 }
 
+function directions(mode) {
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(location_map);
+    var directionsService1 = new google.maps.DirectionsService;
+    if (mode=='walk') {
+        directionsService1.route({
+            origin: {lat: latitude, lng: longitude},
+            destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
+            travelMode: google.maps.TravelMode.WALKING
+        }, function(response, status) {
+            if (status == 'OK') {
+                directionsDisplay.setDirections(response);
+                var table = document.getElementById("directionTable");
+                for (var i=0; i<response.routes[0].legs[0].steps.length; i++) {
+                    var row = table.insertRow(i);
+                    var cell = row.insertCell(0);
+                    cell.innerHTML = response.routes[0].legs[0].steps[i].instructions;
+                }
+
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    } else if (mode == 'drive') {
+            directionsService1.route({
+                origin: {lat: latitude, lng: longitude},
+                destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
+                travelMode: google.maps.TravelMode.DRIVING
+            }, function(response, status) {
+                if (status == 'OK') {
+                    directionsDisplay.setDirections(response);
+                    var table = document.getElementById("directionTable");
+                    for (var i=0; i<response.routes[0].legs[0].steps.length; i++) {
+                        var row = table.insertRow(i);
+                        var cell = row.insertCell(0);
+                        cell.innerHTML = response.routes[0].legs[0].steps[i].instructions;
+                    }
+
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+    } else if (mode == 'bike') {
+        directionsService1.route({
+            origin: {lat: latitude, lng: longitude},
+            destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
+            travelMode: google.maps.TravelMode.BICYCLING
+        }, function(response, status) {
+            if (status == 'OK') {
+                directionsDisplay.setDirections(response);
+                var table = document.getElementById("directionTable");
+                for (var i=0; i<response.routes[0].legs[0].steps.length; i++) {
+                    var row = table.insertRow(i);
+                    var cell = row.insertCell(0);
+                    cell.innerHTML = response.routes[0].legs[0].steps[i].instructions;
+                }
+
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    } else if (mode == 'transit') {
+        directionsService1.route({
+            origin: {lat: latitude, lng: longitude},
+            destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
+            travelMode: google.maps.TravelMode.TRANSIT
+        }, function(response, status) {
+            if (status == 'OK') {
+                directionsDisplay.setDirections(response);
+                var table = document.getElementById("directionTable");
+                for (var i=0; i<response.routes[0].legs[0].steps.length; i++) {
+                    var row = table.insertRow(i);
+                    var cell = row.insertCell(0);
+                    cell.innerHTML = response.routes[0].legs[0].steps[i].instructions;
+                }
+
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+}
 
 function getInfo(place) {
     var picture = place.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 170});

@@ -186,7 +186,7 @@
                         </div></td>
 
                         <td><span class="badge bg-yellow">
-                          <a id="walkTime" href = main.html></a>
+                          <a id="walkTime" href="#" onclick="directions('walk')"></a>
                             </span>
                         </td>
                       </tr>
@@ -194,7 +194,7 @@
                         <td><div class="icon">
                           <i class="fa fa-fw fa-car"></i>
                         </div></td><td><span class="badge bg-yellow">
-                        <a id="driveTime" href = main.html></a>
+                        <a id="driveTime" href ="#" onclick="directions('drive')"></a>
                       </span></td>
                       </tr>
                       <tr>
@@ -203,7 +203,7 @@
                         </div></td>
 
                         <td><span class="badge bg-yellow">
-                          <a id="bikeTime" href = main.html></a>
+                          <a id="bikeTime" href ="#" onclick="directions('bike')"></a>
                         </span></td>
                       </tr>
                       <tr>
@@ -212,7 +212,7 @@
                         </div></td>
 
                         <td><span class="badge bg-yellow">
-                          <a id="transitTime" href = main.html></a>
+                          <a id="transitTime" href ="#" onclick="directions('transit')"></a>
                         </span></td>
                       </tr>
                       </tbody>
@@ -225,6 +225,8 @@
 
     </section>
     <section class="content">
+      <div class="row">
+        <div class="col-md-8">
       <div class="box box-solid bg-light-blue-gradient">
         <div class="box-header">
           <!-- tools box -->
@@ -240,6 +242,27 @@
           <div id="map"></div>
         </div>
       </div>
+          </div>
+        <div class="col-md-4">
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Directions</h3>
+              <div class="box-body no-padding">
+                <div class="pre-scrollable">
+                  <table class="table table-striped" id="directionTable" style="table-layout:fixed">
+
+                  </table>
+                  </div>
+                </div>
+
+
+
+                </div>
+
+              </div>
+            </div>
+        </div>
+        </div>
 
     </section>
     <!-- /.content -->
@@ -258,5 +281,6 @@
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEikMyjUP2Lg1Y4B1FeiFVIMG1Q4Vynk&libraries=places">
 </script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 </body>
 </html>

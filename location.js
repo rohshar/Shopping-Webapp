@@ -45,6 +45,8 @@ function center() {
 
 var lastCenterMarker;
 var geocoder;
+var customLat;
+var customLng;
 function centerAddress(input) {
     geocoder = new google.maps.Geocoder();
     var address=document.getElementById(input).value;
@@ -61,6 +63,8 @@ function centerAddress(input) {
                 position: results[0].geometry.location,
                 icon: 'GoogleMapsMarkers/red_MarkerA.png'
             });
+            customLat = results[0].geometry.location.lat();
+            customLng = results[0].geometry.location.lng();
             lastCenterMarker = marker;
             found_location = true;
             usingCurrentLocation = false;
@@ -207,9 +211,21 @@ function directions(mode) {
     var directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(location_map);
     var directionsService1 = new google.maps.DirectionsService;
+    var lat;
+    var lon;
+    if (!customLat) {
+        lat = latitude;
+    } else {
+        lat = customLat;
+    }
+    if (!customLng) {
+        lon = longitude;
+    } else {
+        lon = customLng;
+    }
     if (mode=='walk') {
         directionsService1.route({
-            origin: {lat: latitude, lng: longitude},
+            origin: {lat: lat, lng: lon},
             destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
             travelMode: google.maps.TravelMode.WALKING
         }, function(response, status) {
@@ -228,7 +244,7 @@ function directions(mode) {
         });
     } else if (mode == 'drive') {
             directionsService1.route({
-                origin: {lat: latitude, lng: longitude},
+                origin: {lat: lat, lng: lon},
                 destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
                 travelMode: google.maps.TravelMode.DRIVING
             }, function(response, status) {
@@ -247,7 +263,7 @@ function directions(mode) {
             });
     } else if (mode == 'bike') {
         directionsService1.route({
-            origin: {lat: latitude, lng: longitude},
+            origin: {lat: lat, lng: lon},
             destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
             travelMode: google.maps.TravelMode.BICYCLING
         }, function(response, status) {
@@ -266,7 +282,7 @@ function directions(mode) {
         });
     } else if (mode == 'transit') {
         directionsService1.route({
-            origin: {lat: latitude, lng: longitude},
+            origin: {lat: lat, lng: lon},
             destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
             travelMode: google.maps.TravelMode.TRANSIT
         }, function(response, status) {

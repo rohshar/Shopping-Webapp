@@ -18,6 +18,10 @@ window.onload = function() {
 };
 
 
+function unc() {
+    alert('hola');
+}
+
 var location_map = null;
 var my_place = null;
 var found_location = false;
@@ -317,12 +321,19 @@ function directions(mode) {
 }
 
 function getInfo(place) {
-    var picture = place.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 170});
-    var openNow;
-    if (place.opening_hours.open_now) {
-        openNow = 'Currently Open';
+    var picture;
+    if (!place.photos) {
+        picture = '';
     } else {
-        openNow = 'Closed';
+        var picture = place.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 170});
+    }
+    var openNow = 'Check Website';
+    if (place.opening_hours) {
+        if (place.opening_hours.open_now) {
+            openNow = 'Currently Open';
+        } else {
+            openNow = 'Closed';
+        }
     }
     href = place.website;
     var info =
@@ -380,4 +391,5 @@ function displayInput(input, change) {
     search = text;
     $(change).html(text);
 }
+
 

@@ -123,8 +123,13 @@ function getNav() {
 }
 
 function calculateRoute(directionsService) {
+    if (usingCurrentLocation) {
+        coords = {lat: latitude, lng: longitude}
+    } else {
+        coords = {lat: customLat, lng: customLng}
+    }
     directionsService.route({
-        origin: {lat: latitude, lng: longitude},
+        origin: coords,
         destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
         travelMode: google.maps.TravelMode.DRIVING
     }, function(response, status) {
@@ -136,7 +141,7 @@ function calculateRoute(directionsService) {
         }
     });
     directionsService.route({
-        origin: {lat: latitude, lng: longitude},
+        origin: coords,
         destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
         travelMode: google.maps.DirectionsTravelMode.WALKING
     }, function(response, status) {
@@ -148,7 +153,7 @@ function calculateRoute(directionsService) {
         }
     });
     directionsService.route({
-        origin: {lat: latitude, lng: longitude},
+        origin: coords,
         destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
         travelMode: google.maps.DirectionsTravelMode.BICYCLING
     }, function(response, status) {
@@ -160,7 +165,7 @@ function calculateRoute(directionsService) {
         }
     });
     directionsService.route({
-        origin: {lat: latitude, lng: longitude},
+        origin: coords,
         destination: {lat: chosenPlace.geometry.location.lat(), lng: chosenPlace.geometry.location.lng()},
         travelMode: google.maps.DirectionsTravelMode.TRANSIT
     }, function(response, status) {
@@ -207,9 +212,18 @@ function addDetails() {
 
 }
 
+var foundDirection = false;
+var lastDirection;
 function directions(mode) {
+    if (foundDirection) {
+        lastDirection.setMap(null);
+    }
+    foundDirection = true;
     var directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(location_map);
+    lastDirection = directionsDisplay;
+    var clearTable = document.getElementById("directionTable");
+    clearTable.innerHTML = "";
     var directionsService1 = new google.maps.DirectionsService;
     var lat;
     var lon;

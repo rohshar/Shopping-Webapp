@@ -33,6 +33,7 @@ function fbLogout() {
 }
 
 window.fbAsyncInit = function() {
+  console.log('work1');
   FB.init({
     appId      : '1823783637837562',
     cookie     : true,  // enable cookies to allow the server to access the session
@@ -54,6 +55,7 @@ window.fbAsyncInit = function() {
 
 // Load the SDK asynchronously
 (function(d, s, id) {
+  console.log('work2');
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;

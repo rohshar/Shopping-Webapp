@@ -1,7 +1,7 @@
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
 
-  
+
   if (response.status === 'connected') {
     testAPI();
   } else if (response.status === 'not_authorized') {
@@ -19,10 +19,11 @@ function statusChangeCallback(response) {
 function checkLoginState() {console.log('work1');
 
   FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-    if (response != 'connected') {
+    if (response.status != 'connected') {
       FB.login();
     }
+    statusChangeCallback(response);
+
   });
 }
 

@@ -1,5 +1,7 @@
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
+
+  
   if (response.status === 'connected') {
     testAPI();
   } else if (response.status === 'not_authorized') {
@@ -14,9 +16,13 @@ function statusChangeCallback(response) {
 // This function is called when someone finishes with the Login
 // Button.  See the onlogin handler attached to it in the sample
 // code below.
-function checkLoginState() {
+function checkLoginState() {console.log('work1');
+
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
+    if (response != 'connected') {
+      FB.login();
+    }
   });
 }
 
@@ -33,12 +39,11 @@ function fbLogout() {
 }
 
 window.fbAsyncInit = function() {
-  console.log('work1');
   FB.init({
     appId      : '1823783637837562',
     cookie     : true,  // enable cookies to allow the server to access the session
     xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.5' // use graph api version 2.5
+    version    : 'v2.7' // use graph api version 2.5
   });
 
   // User can be:
@@ -55,7 +60,6 @@ window.fbAsyncInit = function() {
 
 // Load the SDK asynchronously
 (function(d, s, id) {
-  console.log('work2');
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;

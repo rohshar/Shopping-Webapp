@@ -93,7 +93,7 @@ function initialize() {
         var request = {
             location: my_place,
             radius: '1000',
-            query: search
+            name: search
         };
         if (foundPlaces == true) {
             places = [];
@@ -103,7 +103,7 @@ function initialize() {
             gmarkers = [];
         }
         service = new google.maps.places.PlacesService(location_map);
-        service.textSearch(request, callback);
+        service.radarSearch(request, callback);
 
     } else if (found_location == false) {
     } else if (search == null) {
@@ -184,10 +184,12 @@ function calculateRoute(directionsService) {
 }
 var chosenPlace;
 function addDetails() {
-    for (i = 0; i < places2.length; i++) {
-        var request2 = { placeId : places2[i]['place_id'] };
+    for (var i = 0; i < places3.length; i++) {
+        var request2 = { placeId : places3[i]['place_id'] };
+        console.log(i);
         service.getDetails(request2, function (details, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
+                console.log(i + ' corresponding');
                 var marker = new google.maps.Marker({
                     position: details.geometry.location,
                     map: location_map,
@@ -352,6 +354,7 @@ function getInfo(place) {
 
 var prevInfoWindow;
 var places = [];
+var places3 = [];
 var gmarkers = [];
 
 function addToPlaces(place) {
@@ -368,16 +371,16 @@ function callback(results, status, pagination) {
         foundPlaces = true;
         for (var i = 0; i < results.length; i++) {
             var place = results[i];
-
+            places3.push(place);
             addToPlaces(place);
             places = places + "   " + place['id'];
 
             $("#allPlaces").html(places);
         }
-        if (pagination.hasNextPage) {
-            sleep:2;
-            pagination.nextPage();
-        }
+        //if (pagination.hasNextPage) {
+        //    sleep:2;
+        //    pagination.nextPage();
+        //}
     }
 }
 

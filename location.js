@@ -177,6 +177,7 @@ function callback(results, status, pagination) {
                           infowindow.setContent(information);
                           infowindow.open(map,marker);
                           prevInfoWindow = infowindow;
+                          getReviews(chosenPlace);
                       };
                   })(marker,information,infowindow));
                   gmarkers.push(marker);
@@ -205,7 +206,20 @@ function displayInput(input, change) {
 }
 
 
-
+function getReviews(place) {
+    console.log(place.reviews);
+    for (var i = 0; i < place.reviews.length; i++) {
+        if (place.reviews[i].text) {
+            var infoinner = place.reviews[i].text + ' </br></br>' + infoinner;
+        }
+    }
+    var info =
+            '<div><strong>' + "Reviews for " + place.name + ":" + '</strong><br><br>' +
+            infoinner + '</br>' +
+            '</div>';
+    document.getElementById("reviews-section").innerHTML = info;
+    document.getElementById("reviews-sect").innerHTML = info;
+}
 
 
 
@@ -237,7 +251,7 @@ function calculateRoute(directionsService) {
     }, function(response, status) {
         if (status == 'OK') {
             driving = response;
-            document.getElementById("driveTime").innerHTML=response.routes[0].legs[0].duration.text;
+            document.getElementById("driveTime").innerHTML = response.routes[0].legs[0].duration.text;
         } else {
             window.alert('Directions request failed due to ' + status);
         }

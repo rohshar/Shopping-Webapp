@@ -284,10 +284,13 @@
               <div class="box-body">
                 <div class="box-group" id="accordion">
                   <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                  <div class="panel box box-primary">
+
+
+
+                  <div class="panel box box-primary" id="review1">
                     <div class="box-header with-border">
                       <h4 class="box-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="" id="review1header">
                           Review 1 header
                         </a>
                       </h4>
@@ -298,10 +301,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="panel box box-primary">
+                  <div class="panel box box-primary" id="review2">
                     <div class="box-header with-border">
                       <h4 class="box-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false" id="review2header">
                           Review 2 header
                         </a>
                       </h4>
@@ -312,10 +315,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="panel box box-primary">
+                  <div class="panel box box-primary" id="review3">
                     <div class="box-header with-border">
                       <h4 class="box-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false" id="review3header">
                           Review 3 header
                         </a>
                       </h4>
@@ -326,6 +329,40 @@
                       </div>
                     </div>
                   </div>
+                  <div class="panel box box-primary" id="review4">
+                    <div class="box-header with-border">
+                      <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="collapsed" aria-expanded="false" id="review4header">
+                          Review 4 header
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                      <div class="box-body">
+                        Review 4
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel box box-primary" id="review5">
+                    <div class="box-header with-border">
+                      <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="collapsed" aria-expanded="false" id="review5header">
+                          Review 5 header
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                      <div class="box-body">
+                        Review 5
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
                 </div>
               </div>
               <!-- /.box-body -->
@@ -335,13 +372,6 @@
       </div>
     </section>
 
-    <section class="content">
-
-      <div class="yeah" id="reviews-section">
-        Reviews
-      </div>
-
-    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

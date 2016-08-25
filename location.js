@@ -3,6 +3,12 @@ var longitude = null;
 var usingCurrentLocation = true;
 
 window.onload = function() {
+  $("#accordion").hide();
+  $("#review1").hide();
+  $("#review2").hide();
+  $("#review3").hide();
+  $("#review4").hide();
+  $("#review5").hide();
   var startPos;
   var geoSuccess = function(position) {
     startPos = position;
@@ -208,17 +214,87 @@ function displayInput(input, change) {
 
 function getReviews(place) {
     console.log(place.reviews);
-    for (var i = 0; i < place.reviews.length; i++) {
-        if (place.reviews[i].text) {
-            var infoinner = place.reviews[i].text + ' </br></br>' + infoinner;
+
+    var info2 = '<div><strong>' + "Reviews for " + place.name + '</strong><br><br></div>';
+
+    document.getElementById("reviews-sect").innerHTML = info2;
+
+    if (place.reviews) {
+        if (place.reviews.length == 1) {
+            document.getElementById("collapseOne").innerHTML = place.reviews[0].text;
+            document.getElementById("review1header").innerHTML = 'Review from ' + place.reviews[0].author_name + ': ' + place.reviews[0].rating + ' stars.';
+            $("#review1").show();
+            $("#review2").hide();
+            $("#review3").hide();
+            $("#review4").hide();
+            $("#review5").hide();
         }
+        else if (place.reviews.length == 2) {
+            document.getElementById("collapseOne").innerHTML = place.reviews[0].text;
+            document.getElementById("collapseTwo").innerHTML = place.reviews[1].text;
+            document.getElementById("review1header").innerHTML = 'Review from ' + place.reviews[0].author_name + ': ' + place.reviews[0].rating + ' stars.';
+            document.getElementById("review2header").innerHTML = 'Review from ' + place.reviews[1].author_name + ': ' + place.reviews[1].rating + ' stars.';
+            $("#review1").show();
+            $("#review2").show();
+            $("#review3").hide();
+            $("#review4").hide();
+            $("#review5").hide();
+        }
+        else if (place.reviews.length == 3) {
+            document.getElementById("collapseOne").innerHTML = place.reviews[0].text;
+            document.getElementById("collapseTwo").innerHTML = place.reviews[1].text;
+            document.getElementById("collapseThree").innerHTML = place.reviews[2].text;
+            document.getElementById("review1header").innerHTML = 'Review from ' + place.reviews[0].author_name + ': ' + place.reviews[0].rating + ' stars.';
+            document.getElementById("review2header").innerHTML = 'Review from ' + place.reviews[1].author_name + ': ' + place.reviews[1].rating + ' stars.';
+            document.getElementById("review3header").innerHTML = 'Review from ' + place.reviews[2].author_name + ': ' + place.reviews[2].rating + ' stars.';
+            $("#review1").show();
+            $("#review2").show();
+            $("#review3").show();
+            $("#review4").hide();
+            $("#review5").hide();
+
+        }
+        else if (place.reviews.length == 4) {
+            document.getElementById("collapseOne").innerHTML = place.reviews[0].text;
+            document.getElementById("collapseTwo").innerHTML = place.reviews[1].text;
+            document.getElementById("collapseThree").innerHTML = place.reviews[2].text;
+            document.getElementById("collapseFour").innerHTML = place.reviews[3].text;
+            document.getElementById("review1header").innerHTML = 'Review from ' + place.reviews[0].author_name + ': ' + place.reviews[0].rating + ' stars.';
+            document.getElementById("review2header").innerHTML = 'Review from ' + place.reviews[1].author_name + ': ' + place.reviews[1].rating + ' stars.';
+            document.getElementById("review3header").innerHTML = 'Review from ' + place.reviews[2].author_name + ': ' + place.reviews[2].rating + ' stars.';
+            document.getElementById("review4header").innerHTML = 'Review from ' + place.reviews[3].author_name + ': ' + place.reviews[3].rating + ' stars.';
+            $("#review1").show();
+            $("#review2").show();
+            $("#review3").show();
+            $("#review4").show();
+            $("#review5").hide();
+        }
+        else if (place.reviews.length == 5) {
+            document.getElementById("collapseOne").innerHTML = place.reviews[0].text;
+            document.getElementById("collapseTwo").innerHTML = place.reviews[1].text;
+            document.getElementById("collapseThree").innerHTML = place.reviews[2].text;
+            document.getElementById("collapseFour").innerHTML = place.reviews[3].text;
+            document.getElementById("collapseFive").innerHTML = place.reviews[4].text;
+            document.getElementById("review1header").innerHTML = 'Review from ' + place.reviews[0].author_name + ': ' + place.reviews[0].rating + ' stars.';
+            document.getElementById("review2header").innerHTML = 'Review from ' + place.reviews[1].author_name + ': ' + place.reviews[1].rating + ' stars.';
+            document.getElementById("review3header").innerHTML = 'Review from ' + place.reviews[2].author_name + ': ' + place.reviews[2].rating + ' stars.';
+            document.getElementById("review4header").innerHTML = 'Review from ' + place.reviews[3].author_name + ': ' + place.reviews[3].rating + ' stars.';
+            document.getElementById("review5header").innerHTML = 'Review from ' + place.reviews[4].author_name + ': ' + place.reviews[4].rating + ' stars.';
+            $("#review1").show();
+            $("#review2").show();
+            $("#review3").show();
+            $("#review4").show();
+            $("#review5").show();
+        }
+        else if (place.reviews.length == 0) {
+            $("#review1").hide();
+            $("#review2").hide();
+            $("#review3").hide();
+            $("#review4").hide();
+            $("#review5").hide();
+        }
+        $("#accordion").show();
     }
-    var info =
-            '<div><strong>' + "Reviews for " + place.name + ":" + '</strong><br><br>' +
-            infoinner + '</br>' +
-            '</div>';
-    document.getElementById("reviews-section").innerHTML = info;
-    document.getElementById("reviews-sect").innerHTML = info;
 }
 
 

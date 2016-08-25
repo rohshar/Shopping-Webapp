@@ -168,12 +168,12 @@
                 <p class="margin">Search for Anything!</p>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button type="button" class="btn btn-primary" onclick="displayInput('input1', '#changeText'); init();">Search</button>
+                    <button type="button" class="btn btn-primary" onclick="displayInput('input1', '#changeText');">Search</button>
                   </div>
                   <input type="text" class="form-control" id="input1" placeholder="Lets figure out what you want to search for! (This will change to your input)">
                 </div>
                   <p class="margin">Get Places</p>
-                 <button type="submit" class ="btn btn-primary" onclick="addDetails()">Get Places</button>
+                 <button type="submit" class ="btn btn-primary" onclick="initialize();">Get Places</button>
                 </div>
             </form>
           </div>
@@ -276,11 +276,102 @@
                 </div>
 
               </div>
+            <div class="box box-solid">
+              <div class="box-header with-border">
+                <h3 class="box-title" id="reviews-sect">Reviews</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <div class="box-group" id="accordion">
+                  <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+
+
+
+                  <div class="panel box box-primary" id="review1">
+                    <div class="box-header with-border">
+                      <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="" id="review1header">
+                          Review 1 header
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
+                      <div class="box-body">
+                        Review 1
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel box box-primary" id="review2">
+                    <div class="box-header with-border">
+                      <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false" id="review2header">
+                          Review 2 header
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                      <div class="box-body">
+                        Review 2
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel box box-primary" id="review3">
+                    <div class="box-header with-border">
+                      <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false" id="review3header">
+                          Review 3 header
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                      <div class="box-body">
+                        Review 3
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel box box-primary" id="review4">
+                    <div class="box-header with-border">
+                      <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="collapsed" aria-expanded="false" id="review4header">
+                          Review 4 header
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                      <div class="box-body">
+                        Review 4
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel box box-primary" id="review5">
+                    <div class="box-header with-border">
+                      <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="collapsed" aria-expanded="false" id="review5header">
+                          Review 5 header
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                      <div class="box-body">
+                        Review 5
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+                </div>
+              </div>
+              <!-- /.box-body -->
             </div>
+            <!-- /.box -->
         </div>
-
-
+      </div>
     </section>
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

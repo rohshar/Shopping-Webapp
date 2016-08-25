@@ -1,6 +1,4 @@
-var latitude = null;
-var longitude = null;
-var usingCurrentLocation = true;
+
 
 window.onload = function() {
     var startPos;

@@ -16,7 +16,7 @@ function statusChangeCallback(response) {
 // This function is called when someone finishes with the Login
 // Button.  See the onlogin handler attached to it in the sample
 // code below.
-function checkLoginState() {console.log('work1');
+function checkLoginState() {
 
   FB.getLoginStatus(function(response) {
     if (response.status != 'connected') {
@@ -70,11 +70,15 @@ window.fbAsyncInit = function() {
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
+var uname;
+var uid;
 function testAPI() {
   console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function(response) {
     console.log(response)
     console.log('Successful login for: ' + response.name);
+    uname = response.name;
+    uid = response.id;
     document.getElementById('prof-pic').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture"/>';
     document.getElementById('prof-pic2').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture?type=normal">';
     document.getElementById('prof-pic3').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture"/>';
@@ -84,3 +88,48 @@ function testAPI() {
     document.getElementById('user-coupons').innerHTML = 'Your facebook id is ' +response.id + '.';
   });
 }
+
+
+
+
+
+$(function() {
+$('#signupbutton').click(function (){
+
+    //var firstName = $('#firstName').val();
+    //var lastName = $('#lastName').val();
+    //var grade = $('#grade').val();
+    //var PR = $('#PR').val();
+    var personname = uname;
+    var personid = uid;
+    console.log(personname);
+    console.log(personid);
+    //debugger;
+    $.ajax({
+        type: 'POST',
+        url: 'dataentry.php',
+        datatype: 'json',
+        data: {'personname': personname, 'personid': personid},
+        success: function(data){
+            alert('success');
+            console.log(data);
+            var personname = data[0];
+            var personid = data[1];
+            console.log(personname);
+            console.log(personid);
+            document.getElementById('checkdata').innerHTML = personid;
+            //$('#runnerInfo').append("<tr><td>"+firstName+"</td><td>"+lastName+"</td><td>"+grade+"</td><td>"+PR+"</td></tr>");  
+        },
+        error: function (request, error) {
+            alert('failure');
+
+            console.log("fail!");
+            console.log(arguments);
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
+        }
+
+    });
+
+});
+});

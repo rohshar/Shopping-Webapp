@@ -15,7 +15,28 @@ window.onload = function() {
     latitude = startPos.coords.latitude;
     longitude = startPos.coords.longitude;
   };
-  navigator.geolocation.getCurrentPosition(geoSuccess);
+  //navigator.geolocation.getCurrentPosition(geoSuccess);
+  jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
+    latitude = success.location.lat;
+    longitude = success.location.lng;
+  })
+  .fail(function(err) {
+    alert("FAILED");
+  });
+
+var apiGeolocationSuccess = function(position) {
+  alert("API geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+};
+
+var tryAPIGeolocation = function() {
+  jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
+    apiGeolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
+  })
+  .fail(function(err) {
+    alert("API Geolocation error! \n\n"+err);
+  });
+
+
   var mapDiv = document.getElementById('map');
   location_map = new google.maps.Map(mapDiv, {
       center: {lat: 0, lng: 0},

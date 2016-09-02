@@ -15,7 +15,7 @@
     $id = $_POST['personid'];
 
     //Store input in database
-    $sql = "INSERT INTO LoginInfo (name, f_id)
+    $sql = "INSERT INTO LoginInfo (name, password)
     VALUES ('$fname', $id)";
 
     mysql_query($sql);
